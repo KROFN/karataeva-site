@@ -156,47 +156,84 @@
         }
         .social-btn:hover { background: #fff; color: #000; }
 
-        /* --- МОБИЛЬНАЯ ВЕРСИЯ (Fix) --- */
+		/* --- МОБИЛЬНАЯ ВЕРСИЯ (FIXED V5) --- */
         @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            nav { display: none; } /* Скрываем меню на телефоне */
-            
-            .hero { 
-                flex-direction: column-reverse; /* Картинка сверху, текст снизу */
-                padding: 20px; 
-                padding-top: 80px; /* Отступ под шапку */
-                height: auto; /* На мобилке разрешаем скролл первого экрана */
-                min-height: 100vh;
-                text-align: center;
+            /* Фикс шапки */
+            header { 
+                padding: 15px 20px; 
+                height: 60px;
+                background: rgba(5,5,5, 0.95); /* Почти черный, чтоб не сливалось */
+            }
+            nav { display: none; } /* Скрываем меню */
+
+            /* Фикс главного экрана */
+            .hero {
+                height: auto; /* Разрешаем блоку тянуться */
+                min-height: 100svh; /* Но не меньше высоты экрана (с учетом адресной строки) */
+                padding-top: 70px; /* Отступ сверху под шапку */
+                overflow: hidden; 
+                align-items: flex-start; /* Начинаем сверху */
             }
 
-            .hero-text { 
-                padding-right: 0; 
-                align-items: center; /* Центрируем текст */
-                margin-top: 20px;
+            .hero-container {
+                flex-direction: column; /* Текст над картинкой */
+                padding: 0 20px;
             }
 
-            .hero-image {
-                flex: none; /* Отключаем flex пропорции */
-                width: 100%;
-                height: 40vh; /* Картинка занимает 40% высоты экрана */
+            .hero-text {
+                padding-left: 0; /* Убираем сдвиг */
+                text-align: center; /* Центруем текст */
+                align-items: center;
                 margin-bottom: 20px;
-            }
-            
-            .hero-image img {
-                max-height: 100%;
+                flex: none; /* Текст занимает ровно столько, сколько надо */
             }
 
+            /* Уменьшаем шрифты принудительно */
+            h1 { 
+                font-size: 42px; /* Фиксированный размер, читаемый */
+                line-height: 1.1;
+                margin-bottom: 15px;
+            }
+            .sub-text {
+                font-size: 15px;
+                margin-bottom: 25px;
+                max-width: 100%;
+            }
+
+            /* Кнопка по центру */
+            .cta-button { align-self: center; width: 100%; box-sizing: border-box; text-align: center; }
+
+            /* Блок с картинкой */
+            .hero-image {
+                width: 100%;
+                flex: 1; /* Занимает всё оставшееся место снизу */
+                align-items: flex-end; /* Прижимаем к низу */
+                justify-content: center; /* Центруем по горизонтали */
+                min-height: 300px; /* Минимальное место под фото */
+            }
+
+            /* Круг поменьше и по центру */
             .circle-bg {
-                width: 280px; height: 280px; /* Фикс размер для телефона */
+                width: 280px; height: 280px;
+                top: 60%; left: 50%;
+                transform: translate(-50%, -50%);
             }
 
-            .cta-button { align-self: center; } /* Кнопка по центру */
+            /* Сама картинка */
+            .hero-image img {
+                height: auto;
+                max-height: 50vh; /* Фото не выше половины экрана */
+                max-width: 90%; /* Не прилипает к краям */
+                object-position: bottom center;
+            }
 
-            /* Отступы для остальных блоков */
+            /* Отступы остальных блоков */
             .features, .reviews, footer { padding: 50px 20px; }
-            .features-grid { gap: 30px; }
+            h2.footer-title { font-size: 36px; }
+            .social-links { flex-direction: column; gap: 10px; }
+            .social-btn { width: 100%; text-align: center; box-sizing: border-box; }
         }
+		
     </style>
 </head>
 <body>
