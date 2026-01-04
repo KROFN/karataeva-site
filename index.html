@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karataeva Photo | Искусство момента</title>
+    <title>Теплые Кадры | Искусство момента</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* --- БАЗА --- */
@@ -20,7 +20,7 @@
             color: var(--text-color);
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
-            overflow-x: hidden; /* Убирает горизонтальный скролл */
+            overflow-x: hidden;
         }
 
         /* --- ТИПОГРАФИКА --- */
@@ -35,14 +35,14 @@
             align-items: center;
             position: fixed;
             width: 100%;
-            background: rgba(5, 5, 5, 0.8);
+            background: rgba(5, 5, 5, 0.9);
             backdrop-filter: blur(10px);
             z-index: 1000;
             box-sizing: border-box;
-            height: 70px; /* Фиксируем высоту шапки */
+            height: 70px;
         }
 
-        .logo { font-size: 22px; font-style: italic; font-weight: 600; }
+        .logo { font-size: 24px; font-style: italic; font-weight: 600; font-family: 'Playfair Display', serif; }
         
         nav { display: flex; align-items: center; }
         nav a {
@@ -52,14 +52,14 @@
         nav a:hover { color: #fff; }
         .btn-outline { border: 1px solid #fff; padding: 6px 18px; border-radius: 50px; }
 
-		/* --- ГЛАВНЫЙ ЭКРАН (HERO) - FIXED V3 --- */
+        /* --- ГЛАВНЫЙ ЭКРАН (DESKTOP) --- */
         .hero {
             display: flex;
             height: 100vh;
             width: 100%;
-            align-items: center; /* Текст по центру вертикали */
+            align-items: center;
             justify-content: center;
-            padding: 0; /* Убрали лишние отступы, будем рулить внутри */
+            padding: 0;
             overflow: hidden;
             position: relative;
         }
@@ -67,9 +67,9 @@
         .hero-container {
             display: flex;
             width: 100%;
-            max-width: 1400px; /* Ограничиваем ширину контента, чтобы не разлеталось */
+            max-width: 1400px;
             height: 100%;
-            padding: 0 50px; /* Отступы по краям экрана */
+            padding: 0 50px;
             box-sizing: border-box;
         }
 
@@ -79,17 +79,14 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* Сдвигаем текст чуть правее, навстречу фото */
             padding-left: 5%; 
         }
 
         .hero-image { 
-            flex: 1; /* Делаем равные половинки с текстом */
+            flex: 1; 
             position: relative; 
             display: flex; 
-            /* ГЛАВНОЕ: Прибиваем фото к низу, а не к центру */
             align-items: flex-end; 
-            /* Сдвигаем фото чуть левее, навстречу тексту */
             justify-content: center; 
             height: 100%;
         }
@@ -115,7 +112,6 @@
         }
         .cta-button:hover { transform: scale(1.05); }
 
-        /* Круг и Картинка */
         .circle-bg {
             position: absolute; 
             width: 40vw; 
@@ -123,17 +119,16 @@
             max-width: 600px; max-height: 600px;
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 50%; 
-            /* Центрируем круг относительно блока картинки */
             top: 50%; left: 50%;
-            transform: translate(-50%, -40%); /* Чуть сместил круг, чтобы он был за головой */
+            transform: translate(-50%, -40%);
             z-index: -1;
         }
 
         .hero-image img {
-            max-width: 120%; /* Разрешаем картинке быть чуть шире блока, если надо */
-            height: 90vh; /* Высота картинки - 90% от экрана. Она будет стоять на полу. */
+            max-width: 120%; 
+            height: 90vh; 
             object-fit: contain;
-            object-position: bottom center; /* Якорь картинки - низ по центру */
+            object-position: bottom center;
         }
 
         /* --- ОСТАЛЬНЫЕ БЛОКИ --- */
@@ -149,6 +144,7 @@
         
         footer { padding: 60px 50px; text-align: center; }
         h2.footer-title { font-size: clamp(30px, 5vw, 60px); margin-bottom: 40px; }
+        
         .social-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .social-btn {
             border: 1px solid rgba(255,255,255,0.3); padding: 15px 30px;
@@ -156,91 +152,74 @@
         }
         .social-btn:hover { background: #fff; color: #000; }
 
-		/* --- МОБИЛЬНАЯ ВЕРСИЯ (FIXED V5) --- */
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ (FINAL) --- */
         @media (max-width: 768px) {
-            /* Фикс шапки */
             header { 
                 padding: 15px 20px; 
                 height: 60px;
-                background: rgba(5,5,5, 0.95); /* Почти черный, чтоб не сливалось */
+                background: rgba(5,5,5, 0.95);
             }
-            nav { display: none; } /* Скрываем меню */
+            nav { display: none; }
 
-            /* Фикс главного экрана */
             .hero {
-                height: auto; /* Разрешаем блоку тянуться */
-                min-height: 100svh; /* Но не меньше высоты экрана (с учетом адресной строки) */
-                padding-top: 70px; /* Отступ сверху под шапку */
+                height: auto; 
+                min-height: 100svh; 
+                padding-top: 70px; 
                 overflow: hidden; 
-                align-items: flex-start; /* Начинаем сверху */
+                align-items: flex-start;
             }
 
             .hero-container {
-                flex-direction: column; /* Текст над картинкой */
+                flex-direction: column;
                 padding: 0 20px;
             }
 
             .hero-text {
-                padding-left: 0; /* Убираем сдвиг */
-                text-align: center; /* Центруем текст */
+                padding-left: 0; 
+                text-align: center; 
                 align-items: center;
                 margin-bottom: 20px;
-                flex: none; /* Текст занимает ровно столько, сколько надо */
+                flex: none;
             }
 
-            /* Уменьшаем шрифты принудительно */
-            h1 { 
-                font-size: 42px; /* Фиксированный размер, читаемый */
-                line-height: 1.1;
-                margin-bottom: 15px;
-            }
-            .sub-text {
-                font-size: 15px;
-                margin-bottom: 25px;
-                max-width: 100%;
-            }
+            h1 { font-size: 42px; line-height: 1.1; margin-bottom: 15px; }
+            .sub-text { font-size: 15px; margin-bottom: 25px; max-width: 100%; }
 
-            /* Кнопка по центру */
             .cta-button { align-self: center; width: 100%; box-sizing: border-box; text-align: center; }
 
-            /* Блок с картинкой */
             .hero-image {
                 width: 100%;
-                flex: 1; /* Занимает всё оставшееся место снизу */
-                align-items: flex-end; /* Прижимаем к низу */
-                justify-content: center; /* Центруем по горизонтали */
-                min-height: 300px; /* Минимальное место под фото */
+                flex: 1; 
+                align-items: flex-end; 
+                justify-content: center; 
+                min-height: 300px;
             }
 
-            /* Круг поменьше и по центру */
             .circle-bg {
                 width: 280px; height: 280px;
                 top: 60%; left: 50%;
                 transform: translate(-50%, -50%);
             }
 
-            /* Сама картинка */
             .hero-image img {
                 height: auto;
-                max-height: 50vh; /* Фото не выше половины экрана */
-                max-width: 90%; /* Не прилипает к краям */
+                max-height: 50vh; 
+                max-width: 90%; 
                 object-position: bottom center;
             }
 
-            /* Отступы остальных блоков */
             .features, .reviews, footer { padding: 50px 20px; }
             h2.footer-title { font-size: 36px; }
             .social-links { flex-direction: column; gap: 10px; }
             .social-btn { width: 100%; text-align: center; box-sizing: border-box; }
         }
-		
     </style>
 </head>
 <body>
 
     <!-- Меню -->
     <header>
-        <div class="logo">Karataeva Photo</div>
+        <div class="logo">Теплые Кадры</div>
         <nav>
             <a href="#about">особенности</a>
             <a href="#reviews">отзывы</a>
@@ -248,7 +227,7 @@
         </nav>
     </header>
 
-	<!-- Главный экран -->
+    <!-- Главный экран -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-text">
@@ -263,7 +242,7 @@
             </div>
         </div>
     </section>
-	
+
     <!-- Особенности -->
     <section id="about" class="features">
         <div class="features-grid">
@@ -296,11 +275,11 @@
         <footer>
             <h2 class="footer-title">Давай создавать?</h2>
             <div class="social-links">
-                <a href="#" class="social-btn">Telegram</a>
-                <a href="#" class="social-btn">VKontakte</a>
-                <a href="#" class="social-btn">Email</a>
+                <a href="https://t.me/framesouuul" target="_blank" class="social-btn">Telegram</a>
+                <a href="https://vk.com/karataevasss" target="_blank" class="social-btn">VKontakte</a>
+                <a href="mailto:karataevaaleksandra446@gmail.com" class="social-btn">Email</a>
             </div>
-            <p style="margin-top: 70px; font-size: 12px; opacity: 0.3;">© 2025 Karataeva Photo | KrofnDesign</p>
+            <p style="margin-top: 50px; font-size: 12px; opacity: 0.3;">© 2026 Karataeva Photo</p>
         </footer>
     </section>
 
