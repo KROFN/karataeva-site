@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karataeva Photo | Искусство момента</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- БАЗА --- */
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-gray: #888888;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            overflow-x: hidden; /* Убирает горизонтальный скролл */
+        }
+
+        /* --- ТИПОГРАФИКА --- */
+        h1, h2, h3 { font-family: 'Playfair Display', serif; margin: 0; }
+        p { line-height: 1.5; color: var(--accent-gray); }
+
+        /* --- ШАПКА --- */
+        header {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-sizing: border-box;
+            height: 70px; /* Фиксируем высоту шапки */
+        }
+
+        .logo { font-size: 22px; font-style: italic; font-weight: 600; }
+        
+        nav { display: flex; align-items: center; }
+        nav a {
+            color: #aaa; text-decoration: none; margin-left: 30px;
+            font-size: 14px; text-transform: lowercase; transition: 0.3s;
+        }
+        nav a:hover { color: #fff; }
+        .btn-outline { border: 1px solid #fff; padding: 6px 18px; border-radius: 50px; }
+
+		/* --- ГЛАВНЫЙ ЭКРАН (HERO) - FIXED V3 --- */
+        .hero {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            align-items: center; /* Текст по центру вертикали */
+            justify-content: center;
+            padding: 0; /* Убрали лишние отступы, будем рулить внутри */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-container {
+            display: flex;
+            width: 100%;
+            max-width: 1400px; /* Ограничиваем ширину контента, чтобы не разлеталось */
+            height: 100%;
+            padding: 0 50px; /* Отступы по краям экрана */
+            box-sizing: border-box;
+        }
+
+        .hero-text { 
+            flex: 1; 
+            z-index: 2; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Сдвигаем текст чуть правее, навстречу фото */
+            padding-left: 5%; 
+        }
+
+        .hero-image { 
+            flex: 1; /* Делаем равные половинки с текстом */
+            position: relative; 
+            display: flex; 
+            /* ГЛАВНОЕ: Прибиваем фото к низу, а не к центру */
+            align-items: flex-end; 
+            /* Сдвигаем фото чуть левее, навстречу тексту */
+            justify-content: center; 
+            height: 100%;
+        }
+        
+        h1 { 
+            font-size: clamp(40px, 5.5vw, 90px); 
+            line-height: 1.1; 
+            margin-bottom: 30px; 
+        }
+        h1 span { font-style: italic; color: #ccc; }
+        
+        .sub-text { 
+            font-size: clamp(14px, 1.1vw, 18px); 
+            margin-bottom: 40px; 
+            max-width: 480px; 
+        }
+        
+        .cta-button {
+            display: inline-block; background: #fff; color: #000;
+            padding: 15px 40px; border-radius: 5px; text-decoration: none;
+            font-weight: 600; font-size: 14px; transition: transform 0.2s;
+            align-self: flex-start;
+        }
+        .cta-button:hover { transform: scale(1.05); }
+
+        /* Круг и Картинка */
+        .circle-bg {
+            position: absolute; 
+            width: 40vw; 
+            height: 40vw;
+            max-width: 600px; max-height: 600px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%; 
+            /* Центрируем круг относительно блока картинки */
+            top: 50%; left: 50%;
+            transform: translate(-50%, -40%); /* Чуть сместил круг, чтобы он был за головой */
+            z-index: -1;
+        }
+
+        .hero-image img {
+            max-width: 120%; /* Разрешаем картинке быть чуть шире блока, если надо */
+            height: 90vh; /* Высота картинки - 90% от экрана. Она будет стоять на полу. */
+            object-fit: contain;
+            object-position: bottom center; /* Якорь картинки - низ по центру */
+        }
+
+        /* --- ОСТАЛЬНЫЕ БЛОКИ --- */
+        .features { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px; margin-top: 40px;
+        }
+        .feature-card h3 { font-size: 28px; margin-bottom: 10px; font-style: italic; }
+        
+        .reviews { background: #0a0a0a; padding: 80px 50px; text-align: center; }
+        .review-text { font-size: clamp(20px, 3vw, 32px); font-family: 'Playfair Display', serif; margin-bottom: 20px; }
+        
+        footer { padding: 60px 50px; text-align: center; }
+        h2.footer-title { font-size: clamp(30px, 5vw, 60px); margin-bottom: 40px; }
+        .social-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .social-btn {
+            border: 1px solid rgba(255,255,255,0.3); padding: 15px 30px;
+            color: #fff; text-decoration: none; transition: 0.3s;
+        }
+        .social-btn:hover { background: #fff; color: #000; }
+
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ (Fix) --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            nav { display: none; } /* Скрываем меню на телефоне */
+            
+            .hero { 
+                flex-direction: column-reverse; /* Картинка сверху, текст снизу */
+                padding: 20px; 
+                padding-top: 80px; /* Отступ под шапку */
+                height: auto; /* На мобилке разрешаем скролл первого экрана */
+                min-height: 100vh;
+                text-align: center;
+            }
+
+            .hero-text { 
+                padding-right: 0; 
+                align-items: center; /* Центрируем текст */
+                margin-top: 20px;
+            }
+
+            .hero-image {
+                flex: none; /* Отключаем flex пропорции */
+                width: 100%;
+                height: 40vh; /* Картинка занимает 40% высоты экрана */
+                margin-bottom: 20px;
+            }
+            
+            .hero-image img {
+                max-height: 100%;
+            }
+
+            .circle-bg {
+                width: 280px; height: 280px; /* Фикс размер для телефона */
+            }
+
+            .cta-button { align-self: center; } /* Кнопка по центру */
+
+            /* Отступы для остальных блоков */
+            .features, .reviews, footer { padding: 50px 20px; }
+            .features-grid { gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Меню -->
+    <header>
+        <div class="logo">Karataeva Photo</div>
+        <nav>
+            <a href="#about">особенности</a>
+            <a href="#reviews">отзывы</a>
+            <a href="#contact" class="btn-outline">заказать</a>
+        </nav>
+    </header>
+
+	<!-- Главный экран -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Снимаю так,<br>как <span>чувствует</span><br>новое поколение</h1>
+                <p class="sub-text">Мне 17, и я знаю, как сделать кадры, которые залетят. Никаких скучных поз и натянутых улыбок.</p>
+                <a href="#contact" class="cta-button">УЗНАТЬ БОЛЬШЕ ↓</a>
+            </div>
+            <div class="hero-image">
+                <div class="circle-bg"></div>
+                <!-- ФОТО ДЕВОЧКИ -->
+                <img src="girl.png" alt="Фотограф">
+            </div>
+        </div>
+    </section>
+	
+    <!-- Особенности -->
+    <section id="about" class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>На одной волне</h3>
+                <p>Никакого пафоса и «сложных щей». Со мной легко, я помогу раскрепоститься, даже если ты первый раз перед камерой.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Скорость света</h3>
+                <p>Не нужно ждать фото месяцами. Первые кадры (анонс) ты получишь уже в день съемки.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Доступный стиль</h3>
+                <p>Делаю дорогой визуал, который доступен каждому. Твоя история заслуживает того, чтобы быть красивой.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section id="reviews" class="reviews">
+        <div class="review-card">
+            <div style="color: #fff; font-size: 18px; margin-bottom: 20px; letter-spacing: 3px;">★★★★★</div>
+            <p class="review-text">«Я думала, будет неловко, а в итоге мы просто гуляли и болтали, а фотки получились — разрыв всего!»</p>
+            <p class="author" style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666;">— Счастливая Диана</p>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact">
+        <footer>
+            <h2 class="footer-title">Давай создавать?</h2>
+            <div class="social-links">
+                <a href="#" class="social-btn">Telegram</a>
+                <a href="#" class="social-btn">VKontakte</a>
+                <a href="#" class="social-btn">Email</a>
+            </div>
+            <p style="margin-top: 70px; font-size: 12px; opacity: 0.3;">© 2025 Karataeva Photo | KrofnDesign</p>
+        </footer>
+    </section>
+
+</body>
+</html>
